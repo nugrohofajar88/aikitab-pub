@@ -56,6 +56,19 @@
                 </div>
             </div>
 
+            <div class="mb-6 rounded-xl border border-neutral-200 bg-white p-4 print:hidden">
+                <p class="mb-3 text-xs font-medium uppercase tracking-wide text-neutral-400">Loncat ke Halaman</p>
+                <div class="flex flex-wrap gap-1.5">
+                    @foreach ($book->pages->pluck('page_number') as $n)
+                        <button type="button" @click="goToPage({{ $n }})"
+                            :class="currentPage === {{ $n }} ? 'bg-emerald-600 text-white' : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'"
+                            class="flex h-8 w-8 items-center justify-center rounded-md text-xs font-medium">
+                            {{ $n }}
+                        </button>
+                    @endforeach
+                </div>
+            </div>
+
             <div class="space-y-8">
                 @foreach ($book->pages as $page)
                     <div x-show="currentPage === {{ $page->page_number }}" id="page-{{ $page->page_number }}" class="rounded-xl border border-neutral-200 bg-white p-6 scroll-mt-4 print:rounded-none print:border-0 print:p-0">

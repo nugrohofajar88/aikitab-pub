@@ -39,7 +39,11 @@
                     Baca Kitab &rarr;
                 </a>
             @elseif ($bookRequest->status === 'rejected')
-                <p class="text-sm text-neutral-500">Maaf, permintaan ini tidak bisa diproses.</p>
+                <p class="mb-3 text-sm text-neutral-500">Maaf, permintaan ini gagal diproses (kemungkinan ada masalah dengan file PDF-nya, misalnya terkunci/ter-enkripsi). Silakan coba kirim ulang.</p>
+                <a href="{{ route('requests.create') }}"
+                    class="inline-block rounded-lg bg-neutral-800 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-900">
+                    Kirim Ulang Permintaan
+                </a>
             @endif
 
             <p class="mt-4 text-xs text-neutral-400">Diminta pada {{ $bookRequest->created_at->format('d M Y H:i') }}</p>

@@ -54,4 +54,18 @@ class BookRequestSyncController extends Controller
             ['Content-Type' => 'application/pdf']
         );
     }
+
+    /**
+     * Called when the local instance gives up on a claimed request (e.g. the
+     * imported book failed to process and was deleted) so it doesn't stay
+     * stuck showing "sedang diproses" to the visitor forever. Looked up by
+     * uuid, not id — that's the only identifier the local Book keeps around.
+     */
+    public function reject(string $uuid): JsonResponse
+    {
+        $bookRequest = BookRequest::where('uuid', $uuid)->firstOrFail();
+        $bookRequest->update(['status' => 'rejected']);
+
+        return response()->json(['message' => 'Request ditandai gagal/ditolak.', 'status' => $bookRequest->status]);
+    }
 }
