@@ -9,6 +9,12 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 // Picks up book-export files pushed over FTPS to storage/app/private/book-imports.
-// Requires the actual cron entry `* * * * * php artisan schedule:run` to be set up
-// in cPanel — this registration alone does nothing without that.
+//
+// NOT ACTUALLY USED on the real hosting account — Schedule::command() spawns
+// the command as a separate process via Symfony Process, which needs
+// proc_open(), and that's disabled on this shared host (common security
+// restriction). Kept here for local dev / documentation purposes only. The
+// real cron entry calls the artisan command directly instead of
+// `schedule:run`, bypassing proc_open entirely:
+//   * * * * * /usr/local/bin/ea-php84 /path/to/app/artisan books:process-imports >> /dev/null 2>&1
 Schedule::command('books:process-imports')->everyMinute()->withoutOverlapping();
