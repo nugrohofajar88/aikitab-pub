@@ -20,9 +20,14 @@
             <a href="{{ route('books.index') }}" class="text-lg font-bold tracking-tight text-emerald-700">
                 Kitab<span class="text-neutral-800">AI</span>
             </a>
-            <a href="{{ route('requests.create') }}" class="text-sm font-medium text-neutral-600 hover:text-emerald-700">
-                Minta Kitab Baru
-            </a>
+            <div class="flex items-center gap-4">
+                <a href="{{ route('status.index') }}" class="text-sm font-medium text-neutral-600 hover:text-emerald-700">
+                    Status
+                </a>
+                <a href="{{ route('requests.create') }}" class="text-sm font-medium text-neutral-600 hover:text-emerald-700">
+                    Minta Kitab Baru
+                </a>
+            </div>
         </div>
     </nav>
 
